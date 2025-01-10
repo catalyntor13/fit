@@ -1,0 +1,12 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Plus Jakarta Sans;
+  font-weight: 500;
+  background-size: 200% 200%;
+}
+
