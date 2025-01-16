@@ -1,6 +1,6 @@
-async function deleteUser(userId) {
+export async function deleteUser(userId) {
   try {
-    const response = await fetch("/api/delete-user", {
+    const response = await fetch("http://localhost:3000/api/delete-user", { 
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -18,5 +18,3 @@ async function deleteUser(userId) {
     console.error("Error:", error.message);
   }
 }
-
-export default deleteUser;

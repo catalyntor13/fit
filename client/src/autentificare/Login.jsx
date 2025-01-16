@@ -96,9 +96,12 @@ const Login = () => {
           </div>
   
           <div className="mt-4 text-right">
-            <a href="#" className="text-sm font-medium text-sky-600 hover:text-sky-500">
-              Ai uitat parola?
-            </a>
+            <NavLink className="text-sm font-medium text-sky-600 hover:text-sky-500" to='/autentificare/forgot-password'>
+            Ai uitat parola?
+            
+            </NavLink> 
+             
+            
           </div>
   
           <button

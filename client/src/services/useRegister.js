@@ -6,7 +6,7 @@ export function useRegister() {
     const {mutate: SignUp, isLoading } = useMutation({
         mutationFn: signupApi,
         onSuccess: (user) => {
-            toast.success('User created successfully');
+            toast.success('Contul a fost creat, te rog sa verifici emailul pentru a confirma contul');
         }
     })
 

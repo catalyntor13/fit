@@ -40,14 +40,18 @@ const Header = ({ setOpen, open }) => {
               
               <div className={`${profile ? "translate-y-full opacity-100" : "translate-y-0 opacity-0 pointer-events-none"} 
                 absolute right-0 -top-[6rem] bg-white rounded-xl shadow-lg w-56 p-3 transition-all duration-300 z-50`}>
+                <NavLink to='/profile'> 
                 <div className="flex items-center gap-3 p-2 hover:bg-gray-50 rounded-lg cursor-pointer transition-colors">
                   <CgProfile className="text-gray-600" />
-                  <NavLink to='/profile'><span className="text-sm text-gray-700">Profilul Meu</span></NavLink>
+                 <span className="text-sm text-gray-700">Profilul Meu</span>
                 </div>
+                </NavLink>
+                <NavLink to='/settings'>
                 <div className="flex items-center gap-3 p-2 hover:bg-gray-50 rounded-lg cursor-pointer transition-colors">
                   <CiSettings className="text-gray-600" />
-                  <NavLink to='/settings'><span className="text-sm text-gray-700">Setări</span></NavLink>
+                  <span className="text-sm text-gray-700">Setări</span>
                 </div>
+                </NavLink>
                 <Logout />
               </div>
             </div>

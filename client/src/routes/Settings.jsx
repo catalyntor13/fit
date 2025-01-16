@@ -5,6 +5,7 @@ import { IoIosArrowUp } from "react-icons/io";
 import { useForm } from 'react-hook-form'
 import { useUpdateUser } from "../services/useUpdate";
 import Spinner from "../Spinner";
+import toast from "react-hot-toast";
 
 
 import Header from "./Header";
@@ -21,7 +22,9 @@ const Settings = () => {
   
   function onSubmit({ password }) {
     updateUser({ password }, {
-     
+     onSuccess: () => {
+       toast.success('Parola a fost schimbata cu succes')
+     }
     })
   }
 

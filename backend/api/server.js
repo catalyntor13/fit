@@ -1,8 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
+const cors = require("cors");
 const { createClient } = require("@supabase/supabase-js");
-
 
 // Load environment variables
 dotenv.config();
@@ -10,13 +10,16 @@ dotenv.config();
 // Initialize Supabase client
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
 
-
 // Initialize Express app
 const app = express();
+
+// Enable CORS for all origins (or restrict to specific origin)
+app.use(cors({ origin: "http://localhost:5173" })); // Replace with your frontend's origin
+
 app.use(bodyParser.json());
 
 // Route to delete user
-app.post("/delete-user", async (req, res) => {
+app.post("/api/delete-user", async (req, res) => {
   const { userId } = req.body;
 
   if (!userId) {
@@ -41,7 +44,6 @@ app.post("/delete-user", async (req, res) => {
     res.status(500).json({ error: error.message || "Failed to delete user" });
   }
 });
-
 
 // Start the server
 const PORT = process.env.PORT || 3000;
