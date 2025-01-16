@@ -14,7 +14,7 @@ const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SER
 const app = express();
 
 // Enable CORS for all origins (or restrict to specific origin)
-app.use(cors({ origin: "https://localhost:5173/" })); // Replace with your frontend's origin
+app.use(cors({ origin: "https://fit-bice.vercel.app" })); // Replace with your frontend's origin
 
 app.use(bodyParser.json());
 
