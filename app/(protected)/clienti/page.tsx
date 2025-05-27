@@ -1,4 +1,3 @@
-
 import { getUser } from '@/lib/auth'
 import { createClient } from '@/lib/supabaseServer'
 import ClientiPageClient from './clienti-page-client'
@@ -23,14 +22,15 @@ export type Client = {
   created_at?: string
 }
 
-interface PageProps {
-  searchParams: {
-    page?: string
-    search?: string
-  }
-}
 
-export default async function ClientiPage({ searchParams }: PageProps) {
+export default async function ClientiPage({ 
+  searchParams 
+}: {
+  searchParams: Promise<{ page?: string; search?: string }>
+}) {
+  // Await the searchParams since it's now a Promise in Next.js 15
+  const resolvedSearchParams = await searchParams
+  
   // Get the cached user
   const user = await getUser()
   
@@ -38,12 +38,12 @@ export default async function ClientiPage({ searchParams }: PageProps) {
   const supabase = await createClient()
   
   // Get pagination parameters
-  const currentPage = Number.parseInt(searchParams.page || "1")
+  const currentPage = Number.parseInt(resolvedSearchParams.page || "1")
   const itemsPerPage = 15
   const offset = (currentPage - 1) * itemsPerPage
 
   // Get search parameter
-  const searchTerm =  searchParams.search || ""
+  const searchTerm = resolvedSearchParams.search || ""
 
   // Build the query with search and pagination
   let query = supabase

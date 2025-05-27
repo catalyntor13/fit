@@ -1,8 +1,9 @@
 import SurveyForm from "@/app/survey/Surveyform"
 
 
-export default async function SurveyPage({ searchParams }: { searchParams: { id?: string } }) {
-  const userId = searchParams.id || "";
+export default async function SurveyPage({ searchParams }: { searchParams: Promise<{ id?: string }> }) {
+  const resolvedSearchParams = await searchParams
+  const userId = resolvedSearchParams.id
 
   return (
     <div

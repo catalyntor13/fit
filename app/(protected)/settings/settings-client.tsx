@@ -13,7 +13,7 @@ import ChangeEmailForm from "@/app/(protected)/settings/change-email"
 
 interface UserData {
   id: string
-  email: string
+  email?: string
   created_at?: string
   updated_at?: string
   // Add other user properties as needed
@@ -86,7 +86,7 @@ export default function SettingsClient({ user, profile }: SettingsClientProps) {
                     <Mail className="h-4 w-4" />
                     <span>Email Address</span>
                   </div>
-                  <div className="font-medium">{user.email}</div>
+                  <div className="font-medium">{user.email || 'No Email'}</div>
                  
                 </div>
               </div>
