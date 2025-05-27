@@ -1,4 +1,3 @@
-// components/logout-button.tsx
 "use client";
 
 import { IconLogout } from "@tabler/icons-react";
@@ -6,7 +5,7 @@ import { SidebarMenuButton } from "@/components/ui/sidebar";
 import { logout } from "@/app/(auth)/action";
 import { useState } from "react";
 
-export function LogoutButton() {
+export function Logout() {
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   
   const handleLogout = async () => {

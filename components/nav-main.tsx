@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { Icon } from "@tabler/icons-react"
-import { LogoutButton } from "@/app/(auth)/logout/page"
+import { Logout } from "@/app/(auth)/logout/page"
 
 import {
   SidebarGroup,
@@ -30,7 +30,7 @@ export function NavMain({
             if (item.title === "Logout") {
               return (
                 <SidebarMenuItem key={item.title}>
-                  <LogoutButton />
+                  <Logout />
                 </SidebarMenuItem>
               );
             }
