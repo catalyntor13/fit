@@ -12,6 +12,7 @@ import { Label } from "@/components/ui/label";
 import { AlertCircle, CheckCircle } from 'lucide-react';
 import { updateUserProfile } from "@/app/(auth)/action";
 import { useRouter } from "next/navigation";
+import { getErrorMessage } from "@/lib/utils";
 
 // Define the form schema with zod
 const profileSchema = z.object({
@@ -64,9 +65,9 @@ export default function UserProfileEditForm({ initialProfile }: UserProfileEditF
         // Force a refresh to show the updated data
         router.refresh();
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Error updating profile:", err);
-      setError(err.message || "An error occurred while updating profile");
+      setError(getErrorMessage(err));
     } finally {
       setSubmitting(false);
     }

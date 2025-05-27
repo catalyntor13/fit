@@ -23,8 +23,8 @@ import {
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Search, UserPlus, FileText, Phone, Download, ChevronLeft, ChevronRight } from 'lucide-react'
+import { Tabs, TabsContent,  } from "@/components/ui/tabs"
+import { Search, UserPlus, FileText, Phone, ChevronLeft, ChevronRight } from 'lucide-react'
 import type { Client } from './page'
 
 interface ClientiPageClientProps {

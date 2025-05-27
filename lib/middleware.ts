@@ -4,7 +4,7 @@ import { NextResponse, type NextRequest } from 'next/server'
 
 export async function updateSession(request: NextRequest) {
   // Create a response object
-  let response = NextResponse.next({
+  const response = NextResponse.next({
     request: {
       headers: request.headers,
     },
@@ -37,9 +37,7 @@ export async function updateSession(request: NextRequest) {
     }
   )
 
-  // This refreshes the session and is critical
-  const { data: { session } } = await supabase.auth.getSession()
-
+ 
   // Now get the user - this is more reliable
   const { data: { user } } = await supabase.auth.getUser()
 

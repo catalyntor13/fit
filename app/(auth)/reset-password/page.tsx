@@ -10,7 +10,8 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card } from "@/components/ui/card"
 import { AlertCircle, CheckCircle } from 'lucide-react'
-import { supabase } from "@/lib/supabaseClient" // 
+import { supabase } from "@/lib/supabaseClient" 
+import { getErrorMessage } from "@/lib/utils"
 
 const resetPasswordSchema = z
   .object({
@@ -101,8 +102,8 @@ export default function ResetPassword() {
           router.push("/login")
         }, 2000)
       }
-    } catch (error: any) {
-      setGeneralError(error.message || "An unexpected error occurred")
+    } catch (error: unknown) {
+      setGeneralError(getErrorMessage(error))
     } finally {
       setIsSubmitting(false)
     }

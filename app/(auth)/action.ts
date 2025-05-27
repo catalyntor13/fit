@@ -4,6 +4,7 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { getUser } from '@/lib/auth';
 import { createClient } from '@/lib/supabaseServer';
+import { getErrorMessage } from '@/lib/utils';
 
 // Login Function
 export async function login(formData: FormData) {
@@ -135,9 +136,9 @@ export async function forgotPassword(formData: FormData) {
       success: true,
       message: "Password reset email sent! Please check your inbox.",
     }
-  } catch (error) {
-    console.error("Forgot password error:", error)
-    return { error: "An unexpected error occurred. Please try again." }
+  } catch (error:unknown) {
+
+     return { error: getErrorMessage(error) };
   }
 }
 
@@ -199,9 +200,9 @@ export async function changePassword(formData: FormData) {
     }
 
     return { success: true, message: "Password updated successfully" }
-  } catch (error: any) {
-    console.error("Error changing password:", error)
-    return { error: error.message || "Failed to change password" }
+  } catch (error: unknown) {
+   
+     return { error: getErrorMessage(error) };
   }
 }
 
@@ -241,9 +242,9 @@ export async function getUserProfile() {
       profile,
       daysUntilExpiration
     };
-  } catch (error: any) {
-    console.error("Error fetching user profile:", error);
-    return { error: error.message || "Failed to fetch profile" };
+  } catch (error: unknown) {
+   
+     return { error: getErrorMessage(error) };
   }
 }
 
@@ -292,9 +293,9 @@ export async function updateUserProfile(formData: FormData) {
       message: "Profile updated successfully",
       data
     };
-  } catch (error: any) {
-    console.error("Error updating profile:", error);
-    return { error: error.message || "Failed to update profile" };
+  } catch (error: unknown) {
+
+     return { error: getErrorMessage(error) };
   }
 }
 
@@ -344,8 +345,7 @@ export async function updateUserEmail(formData: FormData) {
       success: true,
       message: "Am trimis un email de confirmare la noua adresă. Te rugăm să verifici inbox-ul și să confirmi schimbarea."
     };
-  } catch (error: any) {
-    console.error("Error updating email:", error);
-    return { error: error.message || "A apărut o eroare la schimbarea email-ului" };
+  } catch (error: unknown) { 
+    return { error: getErrorMessage(error) };
   }
 }

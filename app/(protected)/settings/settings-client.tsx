@@ -6,14 +6,30 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import { Separator } from "@/components/ui/separator"
 import { Badge } from "@/components/ui/badge"
-import { User, KeyRound, Mail, Edit, Shield } from 'lucide-react'
+import { User, KeyRound, Mail, Edit} from 'lucide-react'
 import UserProfileEditForm from "@/app/(protected)/settings/change-name"
 import ChangePasswordForm from "@/app/(protected)/settings/change-password"
 import ChangeEmailForm from "@/app/(protected)/settings/change-email"
 
+interface UserData {
+  id: string
+  email: string
+  created_at?: string
+  updated_at?: string
+  // Add other user properties as needed
+} 
+
+interface ProfileData {
+  id?: string
+  full_name?: string 
+  created_at?: string
+  updated_at?: string
+  // Add other profile properties as needed
+}
+
 interface SettingsClientProps {
-  user: any // Replace with proper User type
-  profile: any // Replace with proper Profile type
+  user: UserData // Replace with proper User type
+  profile: ProfileData // Replace with proper Profile type
 }
 
 export default function SettingsClient({ user, profile }: SettingsClientProps) {

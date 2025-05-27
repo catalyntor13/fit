@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { AlertCircle, CheckCircle } from 'lucide-react';
 import { changePassword } from "@/app/(auth)/action";
+import { getErrorMessage } from "@/lib/utils";
 import {
   Dialog,
   DialogContent,
@@ -71,8 +72,8 @@ export default function ChangePasswordForm() {
         setSuccessMessage(result.message);
         reset({ password: "", newPassword: "", confirmNewPassword: "" });
       }
-    } catch (error: any) {
-      setGeneralError(error.message || "An unexpected error occurred");
+    } catch (error: unknown) {
+      setGeneralError(getErrorMessage(error));
     } finally {
       setIsSubmitting(false);
     }

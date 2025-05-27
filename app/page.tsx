@@ -3,6 +3,7 @@ import { Footer } from "@/components/Footer"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, BarChart, Users, Calendar } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 
 
 
@@ -52,11 +53,13 @@ export default function Home() {
               <div className="lg:w-1/2">
                 <div className="relative">
                   <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-teal-600 to-blue-600 opacity-30 blur"></div>
-                  <img
-                    src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=1740&auto=format&fit=crop"
-                    alt="ActiveFit Dashboard Preview"
-                    className="relative rounded-xl border border-gray-200 shadow-xl"
-                  />
+                 <Image
+                  src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=1740&auto=format&fit=crop"
+                  alt="ActiveFit Dashboard Preview"
+                  className="relative rounded-xl border border-gray-200 shadow-xl"
+                 />
+                   
+                
                 </div>
               </div>
             </div>
@@ -127,8 +130,8 @@ export default function Home() {
                   </div>
                 </div>
                 <p className="text-gray-600">
-                  "ActiveFit has transformed how I manage my fitness business. The client tracking features and
-                  analytics have helped me provide better service and grow my client base."
+                  &quot;ActiveFit has transformed how I manage my fitness business. The client tracking features and
+                  analytics have helped me provide better service and grow my client base.&quot;
                 </p>
               </div>
 
@@ -141,8 +144,8 @@ export default function Home() {
                   </div>
                 </div>
                 <p className="text-gray-600">
-                  "The survey forms and client onboarding process in ActiveFit have saved me hours of administrative
-                  work. I can now focus more on what I love - helping clients achieve their fitness goals."
+                  &quot;The survey forms and client onboarding process in ActiveFit have saved me hours of administrative
+                  work. I can now focus more on what I love - helping clients achieve their fitness goals.&quot;
                 </p>
               </div>
             </div>

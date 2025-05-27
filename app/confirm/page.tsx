@@ -4,8 +4,9 @@ import { useEffect, useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { supabase } from "@/lib/supabaseClient"
 import { Card, CardContent } from "@/components/ui/card"
-import { CheckCircle, XCircle, Mail, UserCheck } from 'lucide-react'
+import { CheckCircle, XCircle, Mail } from 'lucide-react'
 import { Button } from "@/components/ui/button"
+import { getErrorMessage } from "@/lib/utils"
 
 export default function AccountConfirm() {
   const [status, setStatus] = useState<"loading" | "success" | "error">("loading")
@@ -33,7 +34,7 @@ export default function AccountConfirm() {
     // Verify the email/token
     const { error, data } = await supabase.auth.verifyOtp({
       token_hash,
-      type: type as any,
+      type: 'email'
     })
 
     if (error) {
@@ -81,7 +82,7 @@ export default function AccountConfirm() {
       }
     }, 2000)
 
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Error confirming:", error)
     setStatus("error")
     
@@ -90,7 +91,7 @@ export default function AccountConfirm() {
     if (type === "email_change") {
       setErrorMessage("A apărut o eroare la confirmarea schimbării email-ului. Link-ul poate fi expirat.")
     } else {
-      setErrorMessage(error.message || "A apărut o eroare la confirmarea contului")
+      setErrorMessage(getErrorMessage(error))
     }
   }
 }

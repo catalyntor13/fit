@@ -21,7 +21,6 @@ interface Client {
   eight_q?: string
   nine_q?: string
   ten_q?: string
-  [key: string]: any // For any additional fields
 }
 
 interface ChartDataPoint {
@@ -29,12 +28,6 @@ interface ChartDataPoint {
   clients: number
 }
 
-// Define the props interface for the ClientDashboard component
-interface ClientDashboardProps {
-  totalClients: number
-  newClients: number
-  chartData: ChartDataPoint[]
-}
 
 export default async function WelcomePage() {
   // Get the cached user

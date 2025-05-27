@@ -9,6 +9,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Mail, Loader2 } from 'lucide-react'
 import { updateUserEmail } from "@/app/(auth)/action"
+import { getErrorMessage } from "@/lib/utils"
 
 interface ChangeEmailFormData {
   newEmail: string
@@ -63,11 +64,11 @@ export default function ChangeEmailForm() {
         setMessage(null)
       }, 3000)
 
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error updating email:', error)
       setMessage({
         type: 'error',
-        text: error.message || 'A apărut o eroare la schimbarea email-ului'
+        text: getErrorMessage(error)
       })
     } finally {
       setLoading(false)

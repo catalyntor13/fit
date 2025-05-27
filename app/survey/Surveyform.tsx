@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import { useRouter } from "next/navigation"
 import { useForm, type SubmitHandler } from "react-hook-form"
 import { motion, AnimatePresence } from "framer-motion"
 import { supabase } from "@/lib/supabaseClient"
@@ -11,7 +10,7 @@ import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Checkbox } from "@/components/ui/checkbox"
-import questions from "@/lib/survey-questions"
+import questions, { type SurveyQuestion } from "@/lib/survey-questions"
 
 interface SurveyFormProps {
   userId: string
@@ -38,7 +37,7 @@ export default function SurveyForm({ userId }: SurveyFormProps) {
   const [loading, setLoading] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [customInputs, setCustomInputs] = useState<Record<string, string>>({})
-  const router = useRouter()
+ 
 
   const totalSteps = questions.length + 1
 
@@ -80,7 +79,7 @@ export default function SurveyForm({ userId }: SurveyFormProps) {
     setCustomInputs((prev) => ({ ...prev, [questionId]: value }))
   }
 
-  const shouldShowCustomInput = (question: any) => {
+  const shouldShowCustomInput = (question: SurveyQuestion) => {
     if (!question.hasCustomInput) return false
 
     if (question.type === "radio") {
@@ -150,14 +149,14 @@ export default function SurveyForm({ userId }: SurveyFormProps) {
   }
 
   // Question renderers
-  const renderRadioQuestion = (question: any) => (
+  const renderRadioQuestion = (question: SurveyQuestion) => (
     <div className="space-y-4">
       <Label className="text-base font-medium">{question.title}</Label>
       <RadioGroup
         value={watch(question.id as keyof SurveyFormData) || ""}
         onValueChange={(value) => setValue(question.id as keyof SurveyFormData, value)}
       >
-        {question.options?.map((option: any, idx: number) => (
+        {question.options?.map((option, idx) => (
           <Label
             key={idx}
             htmlFor={`${question.id}-${idx}`}
@@ -179,11 +178,11 @@ export default function SurveyForm({ userId }: SurveyFormProps) {
     </div>
   )
 
-  const renderCheckboxQuestion = (question: any) => (
+  const renderCheckboxQuestion = (question: SurveyQuestion) => (
     <div className="space-y-4">
       <Label className="text-base font-medium">{question.title}</Label>
       <div className="space-y-2">
-        {question.options?.map((option: any, idx: number) => (
+        {question.options?.map((option, idx) => (
           <Label
             key={idx}
             htmlFor={`${question.id}-${idx}`}
@@ -211,7 +210,7 @@ export default function SurveyForm({ userId }: SurveyFormProps) {
     </div>
   )
 
-  const renderNumberQuestion = (question: any) => (
+  const renderNumberQuestion = (question: SurveyQuestion) => (
     <div className="space-y-4">
       <Label className="text-base font-medium">{question.title}</Label>
       <div className="flex items-center">
@@ -226,7 +225,7 @@ export default function SurveyForm({ userId }: SurveyFormProps) {
     </div>
   )
 
-  const renderScaleQuestion = (question: any) => (
+  const renderScaleQuestion = (question: SurveyQuestion) => (
     <div className="space-y-4">
       <Label className="text-base font-medium">{question.title}</Label>
       <div className="flex justify-between items-center">
@@ -260,7 +259,7 @@ export default function SurveyForm({ userId }: SurveyFormProps) {
   )
 
   // Main question renderer using switch statement
-  const renderQuestionContent = (question: any) => {
+  const renderQuestionContent = (question: SurveyQuestion) => {
     switch (question.type) {
       case "radio":
         return renderRadioQuestion(question)

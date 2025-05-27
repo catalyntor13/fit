@@ -1,3 +1,24 @@
+interface SurveyOption {
+  value: string
+  label: string
+}
+
+interface SurveyQuestion {
+  id: string
+  title: string
+  type: "radio" | "checkbox" | "number" | "scale"
+  options?: SurveyOption[]
+  hasCustomInput?: boolean
+  customInputTrigger?: string
+  customInputPlaceholder?: string
+  placeholder?: string
+  suffix?: string
+  min?: number
+  max?: number
+  minLabel?: string
+  maxLabel?: string
+}
+
 // Define all questions in an array for easy mapping
 const questions = [
   {
@@ -124,7 +145,8 @@ const questions = [
     customInputTrigger: "Altceva",
     customInputPlaceholder: "Specifică metoda de contact",
   },
-]
+] as const satisfies SurveyQuestion[]
 
 
 export default questions
+export type { SurveyQuestion, SurveyOption }

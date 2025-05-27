@@ -11,6 +11,7 @@ import { Label } from "@/components/ui/label"
 import { Card } from "@/components/ui/card"
 import { AlertCircle, CheckCircle, ArrowLeft } from 'lucide-react'
 import { forgotPassword } from "@/app/(auth)/action"
+import { getErrorMessage } from "@/lib/utils"
 
 // Define the form schema
 const forgotPasswordSchema = z.object({
@@ -51,8 +52,8 @@ export default function ForgotPassword() {
       } else if (result?.success) {
         setSuccessMessage(result.message)
       }
-    } catch (error: any) {
-      setGeneralError(error.message || "An unexpected error occurred")
+    } catch (error: unknown) {
+      setGeneralError(getErrorMessage(error))
     } finally {
       setIsSubmitting(false)
     }
@@ -64,7 +65,7 @@ export default function ForgotPassword() {
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold">Forgot Password</h1>
           <p className="text-gray-500 mt-2">
-            Enter your email address and we'll send you a link to reset your password
+            Enter your email address and we`&apos;`ll send you a link to reset your password
           </p>
         </div>
 
@@ -80,7 +81,7 @@ export default function ForgotPassword() {
             
             <div className="text-center space-y-4">
               <p className="text-sm text-gray-500">
-                Didn't receive the email? Check your spam folder or try again.
+                Didn`&apos;`t receive the email? Check your spam folder or try again.
               </p>
               <Button
                 onClick={() => {

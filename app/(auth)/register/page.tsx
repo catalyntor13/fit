@@ -10,7 +10,8 @@ import { AlertCircle, CheckCircle } from 'lucide-react'
 import Link from "next/link"
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { signup, resendVerificationEmail } from "@/app/(auth)/action" // Import the server actions
+import { signup, resendVerificationEmail } from "@/app/(auth)/action" 
+import { getErrorMessage } from "@/lib/utils"
 
 const registerSchema = z
   .object({
@@ -69,8 +70,8 @@ export default function Register() {
         // Show success message
         setRegistrationComplete(true)
       }
-    } catch (error: any) {
-      setGeneralError(error.message || "An error occurred during registration")
+    } catch (error: unknown) {
+      setGeneralError(getErrorMessage(error))
     } finally {
       setIsSubmitting(false)
     }
@@ -87,8 +88,8 @@ export default function Register() {
       } else if (result?.success) {
         alert("Verification email has been resent!")
       }
-    } catch (error: any) {
-      setGeneralError(error.message || "Failed to resend verification email")
+    } catch (error: unknown) {
+      setGeneralError(getErrorMessage(error))
     }
   }
 

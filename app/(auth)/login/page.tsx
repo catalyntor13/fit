@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { z } from "zod"
+import {  z } from "zod"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -11,6 +11,7 @@ import { Label } from "@/components/ui/label"
 import { Card } from "@/components/ui/card"
 import { AlertCircle } from "lucide-react"
 import { login } from "@/app/(auth)/action"
+import { getErrorMessage } from "@/lib/utils"
 
 // Define the form schema with zod
 const loginSchema = z.object({
@@ -53,9 +54,10 @@ export default function Login() {
       if (result?.error) {
         setGeneralError(result.error)
       }
+
       // No need to handle success case as the server action will redirect
-    } catch (error: any) {
-      setGeneralError(error.message || "An unexpected error occurred")
+    } catch (error: unknown) {
+      setGeneralError(getErrorMessage(error))
     } finally {
       setIsSubmitting(false)
     }
@@ -126,7 +128,7 @@ export default function Login() {
 
         <div className="mt-6 text-center">
           <p className="text-sm text-gray-500">
-            Don't have an account?{" "}
+            Don`&apos;`t have an account?{" "}
             <Link href="/register" className="text-teal-600 hover:text-teal-500 font-medium">
               Sign up
             </Link>

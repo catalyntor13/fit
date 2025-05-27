@@ -9,7 +9,7 @@ import {
   IconLogout,
 } from "@tabler/icons-react"
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Avatar, AvatarImage } from "@/components/ui/avatar"
 
 
 import { NavMain } from "@/components/nav-main"
