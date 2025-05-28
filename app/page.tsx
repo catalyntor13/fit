@@ -54,11 +54,11 @@ export default function Home() {
                 <div className="relative">
                   <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-teal-600 to-blue-600 opacity-30 blur"></div>
                 <Image
-  src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=1740&auto=format&fit=crop"
-  alt="ActiveFit Dashboard Preview"
-  width={1740}
-  height={980}
-  className="relative rounded-xl border border-gray-200 shadow-xl"
+    src="/photo-page.avif"
+    alt="ActiveFit Dashboard Preview"
+    width={1740}
+    height={980}
+    className="relative rounded-xl border border-gray-200 shadow-xl"
 />
                    
                 
