@@ -1,11 +1,11 @@
 "use client";
 
 import { IconLogout } from "@tabler/icons-react";
-import { SidebarMenuButton } from "@/components/ui/sidebar";
+import { Button } from "@/components/ui/button";
 import { logout } from "@/app/(auth)/action";
 import { useState } from "react";
 
-export function Logout() {
+export default function Logout() {
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   
   const handleLogout = async () => {
@@ -14,7 +14,6 @@ export function Logout() {
     setIsLoggingOut(true);
     try {
       await logout();
-      // The redirect happens in the server action
     } catch (error) {
       console.error("Logout failed:", error);
       setIsLoggingOut(false);
@@ -22,14 +21,19 @@ export function Logout() {
   };
   
   return (
-    <SidebarMenuButton 
-      onClick={handleLogout}
-      tooltip="Logout" 
-      className="cursor-pointer"
-      disabled={isLoggingOut}
-    >
-      <IconLogout className="mr-2 h-5 w-5" />
-      <span>{isLoggingOut ? "Logging out..." : "Logout"}</span>
-    </SidebarMenuButton>
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="text-center space-y-4">
+        <h1 className="text-2xl font-bold">Logout</h1>
+        <p className="text-muted-foreground">Click the button below to logout</p>
+        <Button 
+          onClick={handleLogout}
+          disabled={isLoggingOut}
+          className="cursor-pointer"
+        >
+          <IconLogout className="mr-2 h-5 w-5" />
+          <span>{isLoggingOut ? "Logging out..." : "Logout"}</span>
+        </Button>
+      </div>
+    </div>
   );
 }

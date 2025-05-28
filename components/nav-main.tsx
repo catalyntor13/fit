@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { Icon } from "@tabler/icons-react"
-import { Logout } from "@/app/(auth)/logout/logout-component"
+import  Logout  from "@/app/(auth)/logout/logout-component"
 
 import {
   SidebarGroup,
