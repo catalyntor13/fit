@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card } from "@/components/ui/card"
+import { Loader2Icon } from "lucide-react"
 import { AlertCircle } from "lucide-react"
 import { login } from "@/app/(auth)/action"
 import { getErrorMessage } from "@/lib/utils"
@@ -113,7 +114,7 @@ export default function Login() {
           )}
 
           <Button type="submit" className="w-full bg-teal-600 hover:bg-teal-700" disabled={isSubmitting}>
-            {isSubmitting ? "Signing in..." : "Sign in"}
+            {isSubmitting ? <Loader2Icon className="animate-spin"/> : "Sign in"}
           </Button>
         </form>
 

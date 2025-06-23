@@ -1,8 +1,8 @@
-'use server';
+'use server'
 
 import { revalidatePath } from 'next/cache';
-import { redirect } from 'next/navigation';
 import { getUser } from '@/lib/auth';
+import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabaseServer';
 import { getErrorMessage } from '@/lib/utils';
 
@@ -38,7 +38,7 @@ export async function signup(formData: FormData) {
     email,
     password,
     options: {
-      emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/confirm/account-confirm`,
+      emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/(auth)/confirm/account-confirm`,
       data: {
         full_name,
       },
@@ -69,6 +69,8 @@ export async function signup(formData: FormData) {
 
   return { success: true, email };
 }
+
+// Register Function
 
 // Resend e-mail confirmation again function
 export async function resendVerificationEmail(email: string) {

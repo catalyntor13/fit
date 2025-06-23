@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
-import { supabase } from "@/lib/supabaseClient"
+import { supabase } from '@/lib/supabaseClient';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { CheckCircle, XCircle, Loader2, Mail } from "lucide-react"
@@ -15,23 +15,26 @@ const isValidEmailOtpType = (type: string | null): type is EmailOtpType => {
   return type !== null && ["signup", "invite", "magiclink", "recovery", "email_change"].includes(type)
 }
 
-export default function ConfirmPage() {
+
+export default function ChangeEmailPage() {
   const [status, setStatus] = useState<"loading" | "success" | "error" | "expired">("loading")
   const [message, setMessage] = useState("")
   const router = useRouter()
   const searchParams = useSearchParams()
 
   useEffect(() => {
-    const confirmEmail = async () => {
+    const changeEmailFn = async () => {
+
       // Get the token and type from URL parameters
-      const token = searchParams.get("token")
+      const token = searchParams.get("token_hash")
       const type = searchParams.get("type")
+    
 
       if (token && isValidEmailOtpType(type)) {
         try {
           const { data, error } = await supabase.auth.verifyOtp({
             token_hash: token,
-            type: type, // Now properly typed as EmailOtpType
+             type: type,
           })
 
           if (error) {
@@ -47,7 +50,7 @@ export default function ConfirmPage() {
 
             // Wait a moment then redirect to payment
             setTimeout(() => {
-              router.push("/payment")
+              router.push("/settings")
             }, 2000)
           }
         } catch (error) {
@@ -61,7 +64,7 @@ export default function ConfirmPage() {
       }
     }
 
-    confirmEmail()
+    changeEmailFn()
   }, [searchParams, router])
 
   const handleResendEmail = async () => {
@@ -86,7 +89,7 @@ export default function ConfirmPage() {
             <CheckCircle className="h-8 w-8 text-green-500 mx-auto mb-4" />
             <h2 className="text-xl font-semibold mb-2">Email Confirmed!</h2>
             <p className="text-muted-foreground mb-4">{message}</p>
-            <p className="text-sm text-muted-foreground">Redirecting to payment page...</p>
+            <p className="text-sm text-muted-foreground">Redirecting to settings page</p>
           </div>
         )
 
@@ -118,7 +121,7 @@ export default function ConfirmPage() {
       <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle>Email Confirmation</CardTitle>
-          <CardDescription>We&apos;re confirming your email address</CardDescription>
+          <CardDescription>We&apos;re changing your email address</CardDescription>
         </CardHeader>
         <CardContent>{renderContent()}</CardContent>
       </Card>

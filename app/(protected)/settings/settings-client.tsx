@@ -11,6 +11,7 @@ import UserProfileEditForm from "@/app/(protected)/settings/change-name"
 import ChangePasswordForm from "@/app/(protected)/settings/change-password"
 import ChangeEmailForm from "@/app/(protected)/settings/change-email"
 
+
 interface UserData {
   id: string
   email?: string
@@ -24,6 +25,7 @@ interface ProfileData {
   full_name?: string 
   created_at?: string
   updated_at?: string
+  subscription_expires_at?: string
   // Add other profile properties as needed
 }
 
@@ -32,7 +34,22 @@ interface SettingsClientProps {
   profile: ProfileData // Replace with proper Profile type
 }
 
+function getSubscriptionDaysLeft(subscriptionExpiresAt?: string): number {
+  if (!subscriptionExpiresAt) return 0;
+
+  const now = new Date();
+  const expiresAt = new Date(subscriptionExpiresAt);
+
+  const diffMs = expiresAt.getTime() - now.getTime();
+  const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
+  return diffDays > 0 ? diffDays : 0;
+}
+
+
 export default function SettingsClient({ user, profile }: SettingsClientProps) {
+
+
   return (
     <div className="space-y-6">
       <div className="p-5">
@@ -97,7 +114,7 @@ export default function SettingsClient({ user, profile }: SettingsClientProps) {
                 <h3 className="text-sm font-medium mb-2">Status Abonament</h3>
                 <div className="flex items-center gap-2">
                   <Badge variant="default" className="bg-green-500">Active</Badge>
-                  <span className="text-sm text-muted-foreground">30 zile pana cand abonamentul expira</span>
+                  <span className="text-sm text-muted-foreground">{getSubscriptionDaysLeft(profile?.subscription_expires_at)} zile pana cand abonamentul expira</span>
                 </div>
               </div>
             </CardContent>

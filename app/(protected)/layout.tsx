@@ -12,37 +12,26 @@ export default async function ProtectedLayout({
   children: React.ReactNode
 }) {
   // Declare the variable outside the try block
-  let fullName = "User";
-  
-  try {
-    // Check if user is authenticated
     const user = await getUser()
-    
-    if (!user) {
-      redirect('/login')
-    }
-    
-    // Fetch user profile from profiles table
-    const supabase = await createClient()
-    const { data: profile } = await supabase
-      .from('profiles')
-      .select('full_name')
-      .eq('id', user.id)
-      .single()
-    
-    // Set the full name if available
-    if (profile && profile.full_name) {
-      fullName = profile.full_name
-    } else if (user.email) {
-      // Fallback to email username if no full name
-      fullName = user.email.split('@')[0]
-    }
 
+    const supabase = await createClient()
+
+    const { data: profile, error: profileError } = await supabase
+    .from("profiles")
+    .select("subscription_status, full_name")
+    .eq("id", user.id)
+    .single()
     
-  } catch (error) {
-    console.error("Error getting user:", error)
-    redirect('/login')
+    if (profileError || !profile) {
+    console.error('Eroare profil:', profileError)
+    redirect('/error') 
   }
+
+  if (profile.subscription_status !== 'active') {
+    redirect('/payment') 
+  }
+  
+
   
   return (
     <SidebarProvider
@@ -53,7 +42,7 @@ export default async function ProtectedLayout({
         } as React.CSSProperties
       }
     >
-      <AppSidebar fullName={fullName} variant="inset" />
+      <AppSidebar fullName={profile.full_name} variant="inset" />
       <SidebarInset>
         <SiteHeader />
         <div className="flex flex-1 flex-col  ">
