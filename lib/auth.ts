@@ -8,7 +8,7 @@ export const getUser = cache(async () => {
   const { data, error } = await supabase.auth.getUser()
   
   if (error || !data.user) {
-    redirect('/login?Userisnotlogged')
+    redirect('/login?UserNotAuthenticated')
   }
   
   return data.user
