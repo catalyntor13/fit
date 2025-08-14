@@ -132,8 +132,8 @@ export default function Register() {
       <div className="flex-grow flex items-center justify-center p-4">
         <Card className="w-full max-w-md p-8">
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold">Create Account</h1>
-            <p className="text-gray-500 mt-2">Join ActiveFit and transform your fitness business</p>
+            <h1 className="text-3xl font-bold">Creeaza Cont</h1>
+            <p className="text-gray-500 mt-2">Alatura-te ActiveBoost si transformati afacerea</p>
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">

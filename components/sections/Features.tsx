@@ -8,40 +8,23 @@ const Features = () => {
       icon: Users,
       title: "Gestionare Clienți",
       description:
-        "Organizează și gestionează clienții tăi cu ușurință. Păstrează toate informațiile importante într-un singur loc.",
+        " Fiecare formular vine cu o pagină de destinație optimizată pentru conversii în domeniul fitness",
       color: "emerald",
     },
     {
       icon: Target,
       title: "Programe Personalizate",
       description:
-        "Creează programe personalizate pentru fiecare client bazate pe obiectivele și nevoile lor specifice.",
+        "Creează formulare personalizate pentru consultații fitness, planuri nutriționale și evaluări de sănătate",
       color: "slate",
     },
     {
       icon: BarChart3,
       title: "Analize și Raportări",
-      description: "Obține rapoarte detaliate despre progresul clienților și performanța afacerii tale.",
+      description: "Urmărește câți clienți potențiali ai obținut, rata de conversie și performanța fiecărui formular",
       color: "teal",
     },
-    {
-      icon: Calendar,
-      title: "Programare Inteligentă",
-      description: "Gestionează programările și sesiunile cu un sistem de calendar avansat și notificări automate.",
-      color: "emerald",
-    },
-    {
-      icon: Shield,
-      title: "Securitate Avansată",
-      description: "Datele tale și ale clienților sunt protejate cu cele mai înalte standarde de securitate.",
-      color: "slate",
-    },
-    {
-      icon: Zap,
-      title: "Automatizare Completă",
-      description: "Automatizează taskurile repetitive și concentrează-te pe ceea ce contează cu adevărat.",
-      color: "teal",
-    },
+   
   ]
 
   const containerVariants = {
